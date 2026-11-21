@@ -1,0 +1,14 @@
+name = "Linquet"
+logo = "./linquet/logo.svg"
+website = "https://linquet.com/"
+order = 9
+
+joined = """
+Startup Community Manager in Vancouver, Canada, from May to June 2012.
+"""
+
+projects = """
+Beta tester of hardware innovation, management of social networks (Twitter, Facebook Page, YouTube) with Hootsuite, contact with media from the US and Canada, WordPress blog maintenance, and an online marketing and crowdsourcing strategy.
+"""
+
+technologies = ["WordPress", "Hootsuite", "Social Media"]

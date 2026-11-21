@@ -1,0 +1,16 @@
+name = "KA Solution"
+logo = "./ka-solution/logo.svg"
+website = "https://www.kasolution.com.br/Home"
+order = 6
+
+joined = """
+ABAP Instructor from April 2011 to July 2015.
+"""
+
+projects = """
+ABAP lectures on ABAP Foundations, Data Dictionary, Reports, BAPIs, Batch Inputs, Module Pool, LSMW, ABAP Objects, ALV, Enhancements (user-exit, customer-exit, BAdI) and Web Dynpro.
+
+Mentorship of students during one week of a simulated real work environment.
+"""
+
+technologies = ["ABAP", "ABAP Objects", "ALV", "BAdI", "Web Dynpro"]

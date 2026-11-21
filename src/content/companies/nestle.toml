@@ -1,0 +1,16 @@
+name = "Nestlé"
+logo = "./nestle/logo.svg"
+website = "https://www.nestle.com"
+order = 10
+
+joined = """
+Started as an intern in February 2009 at Globe Center AMS, then became Junior Analyst (January 2011) and Analyst (July 2011) until October 2011.
+"""
+
+projects = """
+Coordinated SAP custom developments with an Indian software factory and ABAP training for new interns, and developed applications in ABAP, ABAP Objects and Web Dynpro for ABAP.
+
+Created unit tests with ABAP Unit, SAP Script and Smartforms forms, and BAdI enhancements. Took part in projects to reduce SAP-related incidents and to improve the software development process using DMAIC, and measured internal KPIs.
+"""
+
+technologies = ["ABAP", "ABAP Objects", "Web Dynpro", "Smartforms", "SAP Script", "BAdI", "VBA"]

@@ -1,0 +1,26 @@
+# One file per company. Image paths are relative to this file.
+name = "Example Company"
+logo = "./example-company/logo.svg"
+website = "https://example.com"
+order = 1 # lower numbers are shown first
+
+# Separate paragraphs with a blank line.
+joined = """
+Describe how you joined the company.
+
+A second paragraph is fine too.
+"""
+
+projects = """
+Describe the projects you worked on.
+"""
+
+technologies = ["ABAP", "SAPUI5", "Fiori", "HANA"]
+
+[[images]]
+src = "./example-company/photo-1.svg"
+alt = "Describe the image"
+
+[[images]]
+src = "./example-company/photo-2.svg"
+alt = "Describe the image"

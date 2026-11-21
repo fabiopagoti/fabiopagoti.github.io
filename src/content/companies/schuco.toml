@@ -1,0 +1,16 @@
+name = "Schüco"
+logo = "./schuco/logo.svg"
+website = "https://www.schueco.com"
+order = 1
+
+joined = """
+Joined in September 2025 as SAP Development Tech Lead and still work there.
+"""
+
+projects = """
+Delivering enterprise solutions across ABAP, SAP BTP, CAP, SAPUI5 and SAP Fiori, with hands-on Node.js and Microsoft Azure integrations.
+
+Leading a cross-functional team of 5+ developers in designing, developing and deploying scalable SAP applications and cloud-based extensions. Responsibilities include solution architecture, technical mentoring, code quality governance and end-to-end delivery of business-critical projects using agile methodologies.
+"""
+
+technologies = ["ABAP", "SAP BTP", "CAP", "SAPUI5", "Fiori", "Node.js", "Azure"]

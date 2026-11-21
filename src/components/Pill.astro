@@ -1,0 +1,34 @@
+---
+import Icon from './Icon.astro';
+import type { iconPaths } from './IconPaths';
+
+interface Props {
+	icon: keyof typeof iconPaths;
+	label: string;
+}
+
+const { icon, label } = Astro.props;
+---
+
+<div class="pill">
+	<Icon icon={icon} color="var(--accent-regular)" size="2.5rem" gradient />
+	<h2>{label}</h2>
+</div>
+
+<style>
+	.pill {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	h2 {
+		font-size: var(--text-lg);
+	}
+
+	@media (min-width: 50em) {
+		h2 {
+			font-size: var(--text-2xl);
+		}
+	}
+</style>
