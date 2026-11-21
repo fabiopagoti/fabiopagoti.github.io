@@ -33,9 +33,68 @@ const projects = (await getCollection('work')).sort(
 			</Grid>
 			<section class="stack gap-8">
 				<h2 class="section-title">Companies</h2>
-				{companies.map((company) => <Company company={company} />)}
+				<ol class="timeline" tabindex="0" aria-label="Companies timeline, scroll horizontally">
+					{companies.map((company) => (
+						<li class="timeline-item">
+							<Company company={company} />
+						</li>
+					))}
+				</ol>
 			</section>
 		</main>
 		<ContactCTA />
 	</div>
 </BaseLayout>
+
+<style>
+	/* Horizontal timeline: a line runs across the top with a marker above each company card. */
+	.timeline {
+		display: flex;
+		gap: 1.5rem;
+		list-style: none;
+		margin: 0;
+		padding: 0 0 1.5rem;
+		overflow-x: auto;
+		scroll-snap-type: x proximity;
+	}
+
+	.timeline-item {
+		position: relative;
+		flex: 0 0 min(85vw, 26rem);
+		display: flex;
+		padding-top: 2rem;
+		scroll-snap-align: start;
+	}
+
+	.timeline-item > :global(.company) {
+		flex: 1;
+	}
+
+	/* Line segment (extends through the gap to the next item). */
+	.timeline-item::before {
+		content: '';
+		position: absolute;
+		top: 0.5rem;
+		left: 0;
+		right: -1.5rem;
+		height: 2px;
+		background: var(--gray-200);
+	}
+
+	.timeline-item:last-child::before {
+		right: 0;
+	}
+
+	/* Marker dot. */
+	.timeline-item::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 1rem;
+		height: 1rem;
+		border-radius: 50%;
+		background: var(--accent-regular);
+		box-shadow: 0 0 0 4px var(--accent-overlay);
+	}
+</style>
