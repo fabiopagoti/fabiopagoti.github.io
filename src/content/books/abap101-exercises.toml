@@ -1,0 +1,9 @@
+# TODO: replace placeholder cover, date, download link and description with the real ones.
+title = "ABAP101 Exercises"
+cover = "./abap101-exercises/cover.svg"
+publishDate = "2020-01-01"
+download = "https://example.com/abap101-exercises"
+order = 1
+description = """
+Placeholder description for ABAP101 Exercises.
+"""

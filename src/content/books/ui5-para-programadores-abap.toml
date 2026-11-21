@@ -1,0 +1,10 @@
+# TODO: replace placeholder cover, date, download link, authors and description with the real ones.
+title = "UI5 para programadores ABAP"
+cover = "./ui5-para-programadores-abap/cover.svg"
+publishDate = "2020-01-01"
+download = "https://example.com/ui5-para-programadores-abap"
+order = 3
+# otherAuthors = ["Author Name"]
+description = """
+Placeholder description for UI5 para programadores ABAP.
+"""

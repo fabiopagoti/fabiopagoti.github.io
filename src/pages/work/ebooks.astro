@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import Book from '../../components/Book.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import Hero from '../../components/Hero.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const books = (await getCollection('books')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Ebooks | Fábio Pagoti" description="Ebooks written by Fábio Pagoti">
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-8">
+			<Hero title="Ebooks" tagline="Books I have written, free to download." align="start" />
+			<p><a href="/work/">← Back to My Work</a></p>
+			<ul class="stack gap-8 books">
+				{books.map((book) => <li><Book book={book} /></li>)}
+			</ul>
+		</main>
+		<ContactCTA />
+	</div>
+</BaseLayout>
+
+<style>
+	.books {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+</style>

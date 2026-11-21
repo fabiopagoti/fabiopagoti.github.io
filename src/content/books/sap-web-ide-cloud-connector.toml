@@ -1,0 +1,9 @@
+# TODO: replace placeholder cover, date, download link, authors and description with the real ones.
+title = "SAP Web IDE & SAP Cloud Connector"
+cover = "./sap-web-ide-cloud-connector/cover.svg"
+publishDate = "2020-01-01"
+download = "https://example.com/sap-web-ide-cloud-connector"
+order = 2
+description = """
+Placeholder description for SAP Web IDE & SAP Cloud Connector.
+"""
