@@ -18,6 +18,20 @@ export const collections = {
 				technologies: z.array(z.string()).default([]),
 			}),
 	}),
+	books: defineCollection({
+		// One TOML file per ebook in src/content/books.
+		loader: glob({ base: './src/content/books', pattern: '*.toml' }),
+		schema: ({ image }) =>
+			z.object({
+				title: z.string(),
+				cover: image(),
+				publishDate: z.coerce.date(),
+				download: z.url(),
+				otherAuthors: z.array(z.string()).default([]),
+				order: z.number().default(0),
+				description: z.string(),
+			}),
+	}),
 	work: defineCollection({
 		// Load Markdown files in the src/content/work directory.
 		loader: glob({ base: './src/content/work', pattern: '**/*.md' }),

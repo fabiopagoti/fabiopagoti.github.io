@@ -8,6 +8,7 @@ import PortfolioPreview from '../components/PortfolioPreview.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const companies = (await getCollection('companies')).sort((a, b) => a.data.order - b.data.order);
+const [firstBook] = (await getCollection('books')).sort((a, b) => a.data.order - b.data.order);
 const projects = (await getCollection('work')).sort(
 	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
@@ -25,9 +26,19 @@ const projects = (await getCollection('work')).sort(
 				align="start"
 			/>
 			<Grid variant="offset">
-				{projects.map((project) => (
+				{projects.map((project, i) => (
 					<li>
-						<PortfolioPreview project={project} />
+						{i === 0 ? (
+							<PortfolioPreview
+								project={project}
+								href="/work/ebooks/"
+								title="Ebooks"
+								img={firstBook.data.cover.src}
+								alt="Ebook cover"
+							/>
+						) : (
+							<PortfolioPreview project={project} />
+						)}
 					</li>
 				))}
 			</Grid>

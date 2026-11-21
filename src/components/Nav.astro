@@ -4,17 +4,24 @@ import SocialIcons from './SocialIcons.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
 /** Main menu items */
-const textLinks: { label: string; href: string }[] = [
+type NavLink = { label: string; href: string; exclude?: string; children?: NavLink[] };
+const textLinks: NavLink[] = [
 	{ label: 'Home', href: '/' },
-	{ label: 'Work', href: '/work/' },
+	{
+		label: 'Work',
+		href: '/work/',
+		exclude: '/work/ebooks/',
+		children: [{ label: 'Ebooks', href: '/work/ebooks/' }],
+	},
 	{ label: 'About', href: '/about/' },
 ];
 
 /** Test if a link is pointing to the current page. */
-const isCurrentPage = (href: string) => {
+const isCurrentPage = (href: string, exclude?: string) => {
 	let pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
 	if (pathname.at(0) !== '/') pathname = '/' + pathname;
 	if (pathname.at(-1) !== '/') pathname += '/';
+	if (exclude && pathname.startsWith(exclude)) return false;
 	return pathname === href || (href !== '/' && pathname.startsWith(href));
 };
 ---
@@ -36,11 +43,26 @@ const isCurrentPage = (href: string) => {
 	</div>
 	<noscript>
 		<ul class="nav-items">
-			{textLinks.map(({ label, href }) => (
-				<li>
-					<a aria-current={isCurrentPage(href) ? 'page' : null} class="link" href={href}>
+			{textLinks.map(({ label, href, exclude, children }) => (
+				<li class:list={['item', { 'has-submenu': children }]}>
+					<a aria-current={isCurrentPage(href, exclude) ? 'page' : null} class="link" href={href}>
 						{label}
 					</a>
+					{children && (
+						<ul class="submenu">
+							{children.map((child) => (
+								<li>
+									<a
+										aria-current={isCurrentPage(child.href, child.exclude) ? 'page' : null}
+										class="link"
+										href={child.href}
+									>
+										{child.label}
+									</a>
+								</li>
+							))}
+						</ul>
+					)}
 				</li>
 			))}
 		</ul>
@@ -54,11 +76,26 @@ const isCurrentPage = (href: string) => {
 	</noscript>
 	<div id="menu-content" hidden>
 		<ul class="nav-items">
-			{textLinks.map(({ label, href }) => (
-				<li>
-					<a aria-current={isCurrentPage(href) ? 'page' : null} class="link" href={href}>
+			{textLinks.map(({ label, href, exclude, children }) => (
+				<li class:list={['item', { 'has-submenu': children }]}>
+					<a aria-current={isCurrentPage(href, exclude) ? 'page' : null} class="link" href={href}>
 						{label}
 					</a>
+					{children && (
+						<ul class="submenu">
+							{children.map((child) => (
+								<li>
+									<a
+										aria-current={isCurrentPage(child.href, child.exclude) ? 'page' : null}
+										class="link"
+										href={child.href}
+									>
+										{child.label}
+									</a>
+								</li>
+							))}
+						</ul>
+					)}
 				</li>
 			))}
 		</ul>
@@ -187,6 +224,15 @@ const isCurrentPage = (href: string) => {
 		border-bottom: 1px solid var(--gray-800);
 	}
 
+	.submenu {
+		margin: 0.75rem 0 0;
+		padding: 0 0 0 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		list-style: none;
+	}
+
 	.link {
 		display: inline-block;
 		color: var(--gray-300);
@@ -255,6 +301,35 @@ const isCurrentPage = (href: string) => {
 			background: var(--gradient-stroke);
 			border-radius: 999rem;
 			z-index: -1;
+		}
+
+		.item {
+			position: relative;
+		}
+
+		.submenu {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			margin: 0;
+			padding: 0.5rem;
+			min-width: 100%;
+			gap: 0.25rem;
+			border-radius: 1rem;
+			border: 1px solid var(--gray-800);
+			background: var(--gray-999);
+			box-shadow: var(--shadow-lg);
+		}
+
+		.submenu .link {
+			display: block;
+			white-space: nowrap;
+		}
+
+		.has-submenu:hover > .submenu,
+		.has-submenu:focus-within > .submenu {
+			display: flex;
 		}
 
 		.link {

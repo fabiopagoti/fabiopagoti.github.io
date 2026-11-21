@@ -1,46 +1,51 @@
 ---
-import CallToAction from './CallToAction.astro';
-import Icon from './Icon.astro';
+import CallToAction from "./CallToAction.astro";
+import Icon from "./Icon.astro";
 ---
 
 <aside>
-	<h2>Get in Touch with me</h2>
-	<CallToAction href="mailto:fabiopagoti@gmail.com">
-		Send Me a Message
-		<Icon icon="paper-plane-tilt" size="1.2em" />
-	</CallToAction>
+  <h2>Get in Touch with me</h2>
+  <div class="cta">
+    <CallToAction href="mailto:fabiopagoti@gmail.com">
+      Send Me a Message
+      <Icon icon="paper-plane-tilt" size="1.2em" />
+    </CallToAction>
+  </div>
 </aside>
 
 <style>
-	aside {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 3rem;
-		border-top: 1px solid var(--gray-800);
-		border-bottom: 1px solid var(--gray-800);
-		padding: 5rem 1.5rem;
-		background-color: var(--gray-999_40);
-		box-shadow: var(--shadow-sm);
-	}
+  aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    border-top: 1px solid var(--gray-800);
+    border-bottom: 1px solid var(--gray-800);
+    padding: 3rem;
+    /* Align content with the page `.wrapper` (max-width 83rem, 1.5rem gutter). */
+    padding-inline: max(1.5rem, calc((100% - 83rem) / 2 + 1.5rem));
+    background-color: var(--gray-999_40);
+    box-shadow: var(--shadow-sm);
+  }
 
-	h2 {
-		font-size: var(--text-xl);
-		text-align: center;
-		max-width: 15ch;
-	}
+  h2 {
+    font-size: var(--text-xl);
+    text-align: center;
+    max-width: 20ch;
+  }
 
-	@media (min-width: 50em) {
-		aside {
-			padding: 7.5rem;
-			flex-direction: row;
-			flex-wrap: wrap;
-			justify-content: space-between;
-		}
+  @media (min-width: 50em) {
+    aside {
+      /* padding-left: 7.5rem;
+  		padding-right: 7.5rem; */
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
 
-		h2 {
-			font-size: var(--text-3xl);
-			text-align: left;
-		}
-	}
+    h2 {
+      font-size: var(--text-3xl);
+      text-align: left;
+    }
+  }
 </style>

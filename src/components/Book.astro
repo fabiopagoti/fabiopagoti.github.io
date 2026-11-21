@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	book: CollectionEntry<'books'>;
+}
+
+const { title, cover, publishDate, download, otherAuthors, description } = Astro.props.book.data;
+
+const date = publishDate.toLocaleDateString('en-US', {
+	year: 'numeric',
+	month: 'long',
+	timeZone: 'UTC',
+});
+---
+
+<article class="book box">
+	<Image src={cover} alt={`${title} cover`} width={240} class="cover" />
+	<div class="stack gap-2">
+		<h3>{title}</h3>
+		<p class="meta">
+			Published <time datetime={publishDate.toISOString()}>{date}</time>
+			{otherAuthors.length > 0 && <> · with {otherAuthors.join(', ')}</>}
+		</p>
+		<p>{description.trim()}</p>
+		<p><a class="download" href={download} rel="noopener">Download</a></p>
+	</div>
+</article>
+
+<style>
+	.box {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		border: 1px solid var(--gray-800);
+		border-radius: 0.75rem;
+		padding: 1.5rem;
+		background-color: var(--gray-999_40);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.cover {
+		width: 10rem;
+		height: auto;
+		border-radius: 0.5rem;
+	}
+
+	h3 {
+		font-size: var(--text-xl);
+	}
+
+	p {
+		color: var(--gray-400);
+	}
+
+	.meta {
+		font-size: var(--text-sm);
+	}
+
+	.download {
+		color: var(--accent-regular);
+		font-weight: 600;
+	}
+
+	@media (min-width: 50em) {
+		.box {
+			flex-direction: row;
+			border-radius: 1.5rem;
+			padding: 2.5rem;
+		}
+	}
+</style>
