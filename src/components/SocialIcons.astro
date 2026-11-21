@@ -1,0 +1,55 @@
+---
+import Icon from './Icon.astro';
+import type { iconPaths } from './IconPaths';
+
+/** Icon links to social media — edit these with links to your profiles! */
+const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
+	{ label: 'SAP Community', href: 'https://community.sap.com/t5/user/viewprofilepage/user-id/172350', icon: 'sap-community-logo' },
+	{ label: 'GitHub', href: 'https://github.com/fabiopagoti', icon: 'github-logo' },
+	{ label: 'Stack Overflow', href: 'https://stackoverflow.com/users/fabiopagoti', icon: 'stack-overflow-logo' },
+	{ label: 'X', href: 'https://x.com/fabiopagoti', icon: 'x-logo' },
+	{ label: 'Twitch', href: 'https://www.twitch.tv/fabiopagoti', icon: 'twitch-logo' },
+	{ label: 'Credly', href: 'https://www.credly.com/users/fabio-luiz-esperati-pagoti', icon: 'credly-logo' },
+	//{ label: 'CodePen', href: 'https://codepen.io/me', icon: 'codepen-logo' },
+	//{ label: 'dribbble', href: 'https://dribbble.com/me', icon: 'dribbble-logo' },
+	//{ label: 'YouTube', href: 'https://www.youtube.com/@me/', icon: 'youtube-logo' },
+];
+---
+
+<div class="socials">
+	{iconLinks.map(({ href, icon, label }) => (
+		<a href={href} class="social">
+			<span class="sr-only">{label}</span>
+			<Icon icon={icon} />
+		</a>
+	))}
+</div>
+
+<style>
+	.socials {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.625rem;
+		font-size: var(--icon-size, var(--text-xl));
+	}
+
+	.social {
+		display: flex;
+		padding: var(--icon-padding, 0.5rem);
+		text-decoration: none;
+		color: var(--accent-dark);
+		transition: color var(--theme-transition);
+	}
+
+	.social:hover,
+	.social:focus {
+		color: var(--accent-text-over);
+	}
+
+	@media (min-width: 60em) {
+		.socials {
+			justify-content: flex-end;
+			gap: 0;
+		}
+	}
+</style>
