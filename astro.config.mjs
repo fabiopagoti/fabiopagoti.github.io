@@ -5,5 +5,9 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
      site: 'https://fabiopagoti.com',
      //base: './',
-     output: 'static'     
+     output: 'static',
+     redirects: {
+          '/books': '/work/ebooks/',
+          '/ebooks': '/work/ebooks/',
+     },
 });
