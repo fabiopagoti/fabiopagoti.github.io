@@ -24,7 +24,7 @@ const date = publishDate.toLocaleDateString('en-US', {
 			{otherAuthors.length > 0 && <> · with {otherAuthors.join(', ')}</>}
 		</p>
 		<p>{description.trim()}</p>
-		<p><a class="download" href={download} rel="noopener">Download</a></p>
+		<p><a class="download" href={download} target="_blank" rel="noopener noreferrer">Download</a></p>
 	</div>
 </article>
 

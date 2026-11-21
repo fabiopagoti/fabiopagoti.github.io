@@ -3,19 +3,18 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
 	project: CollectionEntry<'work'>;
-	/** Overrides the default link to the project's page. */
-	href?: string;
-	/** Overrides the project's title and image. */
-	title?: string;
-	img?: string;
-	alt?: string;
 }
 
 const { data, id } = Astro.props.project;
-const { href = `/work/${id}`, title = data.title, img = data.img, alt = data.img_alt || '' } = Astro.props;
+const { 
+	href = `data.href` || `/work/${id}`, 
+	title = data.title,
+	img = data.img,
+	alt = data.img_alt || '' 
+} = Astro.props;
 ---
 
-<a class="card" href={href}>
+<a class="card" href={data.href} target="_blank" rel="noopener noreferrer">
 	<span class="title">{title}</span>
 	<img src={img} alt={alt} loading="lazy" decoding="async" />
 </a>
@@ -42,7 +41,7 @@ const { href = `/work/${id}`, title = data.title, img = data.img, alt = data.img
 	}
 
 	.title {
-		grid-area: 1 / 1 / 2 / 2;
+		grid-area: 1 / 1 / 2 / 2;		
 		z-index: 1;
 		margin: 0.5rem;
 		padding: 0.5rem 1rem;

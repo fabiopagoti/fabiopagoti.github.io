@@ -1,10 +1,10 @@
 # TODO: replace placeholder cover, date, download link, authors and description with the real ones.
 title = "UI5 para programadores ABAP"
-cover = "./ui5-para-programadores-abap/cover.svg"
-publishDate = "2020-01-01"
-download = "https://example.com/ui5-para-programadores-abap"
+cover = "./ui5-para-programadores-abap/cover.jpeg"
+publishDate = "2016-05-07"
+download = "https://leanpub.com/ui5"
 order = 3
 # otherAuthors = ["Author Name"]
 description = """
-Placeholder description for UI5 para programadores ABAP.
+Are you an ABAP developer who has recently heard about Fiori, UI5, and OData, and realized that these concepts ought to be familiar to you? You are not alone. Many ABAP developers began their journey into front-end development back in the days of BSP, while others started with the advent of Web Dynpro. However, no ABAP developer should overlook the importance of learning UI5—the JavaScript library created by SAP that powers hundreds of Fiori applications.
 """

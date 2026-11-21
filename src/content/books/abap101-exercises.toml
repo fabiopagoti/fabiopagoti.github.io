@@ -1,9 +1,9 @@
-# TODO: replace placeholder cover, date, download link and description with the real ones.
-title = "ABAP101 Exercises"
-cover = "./abap101-exercises/cover.svg"
-publishDate = "2020-01-01"
-download = "https://example.com/abap101-exercises"
+title = "ABAP 101 Exercises - Beginner - Starting from scratch"
+cover = "./abap101-exercises/cover.jpg"
+publishDate = "2014-12-13"
+download = "/ebooks/abap101-exercises.pdf"
 order = 1
+otherAuthors = ["Flávio Furlan", "Jayme Freitas"]
 description = """
-Placeholder description for ABAP101 Exercises.
+101 exercises directed to ABAP beginners
 """

@@ -1,9 +1,8 @@
-# TODO: replace placeholder cover, date, download link, authors and description with the real ones.
 title = "SAP Web IDE & SAP Cloud Connector"
-cover = "./sap-web-ide-cloud-connector/cover.svg"
-publishDate = "2020-01-01"
-download = "https://example.com/sap-web-ide-cloud-connector"
+cover = "./sap-web-ide-cloud-connector/cover.png"
+publishDate = "2018-08-08"
+download = "/ebooks/sap-web-ide-e-sap-cloud-connector.pdf"
 order = 2
 description = """
-Placeholder description for SAP Web IDE & SAP Cloud Connector.
+This e-book was written to help developers use the Web IDE—a service within the SAP Cloud Platform—to create Fiori applications. It provides a detailed, step-by-step guide that will enable you to connect a cloud-based development environment (SAP Web IDE) to an on-premise system (typically a client’s ERP or S/4HANA system).
 """
