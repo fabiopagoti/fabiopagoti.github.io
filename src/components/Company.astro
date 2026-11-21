@@ -1,0 +1,88 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Tags from './Tags.astro';
+
+interface Props {
+	company: CollectionEntry<'companies'>;
+}
+
+const { name, logo, website, joined, projects, images, technologies } = Astro.props.company.data;
+
+/** Split a long text into paragraphs on blank lines. */
+const paragraphs = (text: string) => text.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+---
+
+<article class="company box stack gap-6">
+	<header class="header">
+		<Image src={logo} alt={`${name} logo`} height={48} class="logo" />
+		<h3><a href={website} rel="noopener">{name}</a></h3>
+	</header>
+	<section class="stack gap-2">
+		<h4>How I joined</h4>
+		{paragraphs(joined).map((p) => <p>{p}</p>)}
+	</section>
+	<section class="stack gap-2">
+		<h4>Projects</h4>
+		{paragraphs(projects).map((p) => <p>{p}</p>)}
+	</section>
+	{images.length > 0 && (
+		<div class="images">
+			{images.map(({ src, alt }) => <Image src={src} alt={alt} width={400} />)}
+		</div>
+	)}
+	<Tags tags={technologies} />
+</article>
+
+<style>
+	.box {
+		border: 1px solid var(--gray-800);
+		border-radius: 0.75rem;
+		padding: 1.5rem;
+		background-color: var(--gray-999_40);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.header {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.logo {
+		width: auto;
+		height: 3rem;
+	}
+
+	h3 {
+		font-size: var(--text-xl);
+	}
+
+	h4 {
+		font-size: var(--text-md);
+		color: var(--gray-0);
+	}
+
+	p {
+		color: var(--gray-400);
+	}
+
+	.images {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.images :global(img) {
+		max-width: 100%;
+		height: auto;
+		border-radius: 0.5rem;
+	}
+
+	@media (min-width: 50em) {
+		.box {
+			border-radius: 1.5rem;
+			padding: 2.5rem;
+		}
+	}
+</style>
