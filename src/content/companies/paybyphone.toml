@@ -1,0 +1,16 @@
+name = "PayByPhone"
+logo = "./paybyphone/logo.svg"
+website = "https://www.paybyphone.com/"
+order = 8
+
+joined = """
+Mobile & IVR Tester in Vancouver, Canada, from June to December 2012.
+"""
+
+projects = """
+Developed IVR regression tests in C# with nUnit, QA tested IVR and mobile applications, and worked in Scrum with Jira, Tempo, Zephyr and TeamCity for continuous integration.
+
+Also studied PCI SSC, translated documents from English to Portuguese, and took part in Transpo Quip Latin America and the 3rd Mission of Urban Mobility in São Paulo.
+"""
+
+technologies = ["C#", "nUnit", "Visual Studio", "Git", "Oracle", "NHibernate", "Jira"]

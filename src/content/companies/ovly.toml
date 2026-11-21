@@ -1,0 +1,16 @@
+name = "OVLY"
+logo = "./ovly/logo.svg"
+website = "http://ovly.com.br"
+order = 3
+
+joined = """
+Co-owner and instructor since December 2017.
+"""
+
+projects = """
+Creator of the courses HANA Developer, UI5 for ABAP developers, SAP Gateway, SAP Fiori FullStack and ABAP Objects.
+
+More than 800 students in different regions of Brazil and in the US, Canada, Portugal and Australia, around 2000 hours of training sessions and over 1000 written pages of learning resources.
+"""
+
+technologies = ["HANA", "SAPUI5", "SAP Gateway", "Fiori", "ABAP Objects"]

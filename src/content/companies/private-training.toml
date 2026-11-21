@@ -1,0 +1,16 @@
+name = "Private Training"
+logo = "./private-training/logo.svg"
+website = "http://privatetraining.com.br/"
+order = 4
+
+joined = """
+Instructor from July 2015 to July 2017.
+"""
+
+projects = """
+Pioneered the teaching of Fiori, SAPUI5, SAP Cloud and SAP Gateway courses in Brazil, introducing more than 600 students to newer SAP technologies.
+
+Creator of HANA for ABAP developers (16 classes, ~320 students), UI5 for ABAP developers (~15 classes, ~270 students), SAP Gateway (1 class, ~20 students), SAP Fiori (18 classes, ~360 students) and ABAP Objects (4 classes, ~72 students).
+"""
+
+technologies = ["HANA", "SAPUI5", "SAP Gateway", "Fiori", "ABAP Objects"]

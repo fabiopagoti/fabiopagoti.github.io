@@ -1,0 +1,16 @@
+name = "LARC"
+logo = "./larc/logo.svg"
+website = "https://www.larc.usp.br"
+order = 11
+
+joined = """
+Scholarship student at the Laboratory of Computer Networks and Architecture from November 2007 to January 2009.
+"""
+
+projects = """
+Tested performance metrics of the IP protocol (IPPM), wrote software requirements, interface requirements, class diagrams and use cases, and developed JavaServer Pages for the NetLab tool of the TIDIA-Ae/Sakai e-learning project.
+
+Presented NetLab at the 60th Annual Meeting of the Brazilian Society for Science Progress (2008) and took part in the article "NETLAB: A Framework for Remote Engineering and Science Experiments" for the 38th Annual Frontiers in Education Conference.
+"""
+
+technologies = ["Java", "JSP", "UML", "Sakai"]

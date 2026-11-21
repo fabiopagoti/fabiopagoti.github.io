@@ -1,0 +1,18 @@
+name = "Independent Consultant"
+logo = "./independent-consultant/logo.svg"
+website = "https://github.com/fabiopagoti"
+order = 2
+
+joined = """
+Worked as an independent Fiori Consultant from July 2017 to August 2025, for different customers.
+"""
+
+projects = """
+Development of custom Fiori apps for on-premise and cloud systems, activation of standard Fiori apps, prototyping with SAP BUILD, and troubleshooting and support of existing apps.
+
+Preparation and delivery of SAP trainings (ABAP, RAP, Fiori Elements, BTP, Cloud Foundry, SAPUI5, S/4HANA), management of small developer teams (2 to 5 people) and effort and cost estimation for new developments.
+
+Communication with business departments around the globe: Brazil, US, Canada, Germany, China, Italy, India, Costa Rica, Spain, Lithuania and Korea.
+"""
+
+technologies = ["HANA", "Fiori", "SAPUI5", "SAP Cloud", "SAP Gateway", "ABAP", "SAP BUILD"]

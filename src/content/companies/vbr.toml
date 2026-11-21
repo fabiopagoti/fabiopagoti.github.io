@@ -1,0 +1,16 @@
+name = "VBR (former Verti Consulting)"
+logo = "./vbr/logo.svg"
+website = "https://vbrti.com.br/"
+order = 7
+
+joined = """
+ABAP Consultant from January 2013 to September 2014.
+"""
+
+projects = """
+Projects for Konica Minolta (pricing procedure adaptation, SD and FI-AA integration, FCONT), Humax Brasil (rollout for Brazil), Ajinomoto (ECC 6.04 to 6.06 migration, SD requirements, FCI, Smartforms, Brazilian localization notes, LO-ARM), Skanska (FI asset report), Panasonic (new plant and legacy communication) and SPED Fiscal specifications.
+
+Internal work included the company website in WordPress and administration of Atlassian JIRA and Confluence.
+"""
+
+technologies = ["ABAP", "SD", "FI-AA", "Smartforms", "LO-ARM"]

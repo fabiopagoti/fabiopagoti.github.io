@@ -1,0 +1,18 @@
+name = "DUX Innovation"
+logo = "./dux-innovation/logo.svg"
+website = "http://duxinnovation.com/"
+order = 5
+
+joined = """
+Co-Owner, Solution Architect and Developer from February 2015 to July 2017.
+"""
+
+projects = """
+Participated in many projects for the customers CSP, Klabin, Santa Casa de Campo Grande, Festo and Aché, covering HANA (XS, XSDS, XSUnit, SQLScript, CDS, OData), Fiori (30+ custom apps), Gateway services, UI5 1.28 to 1.46, SAP Cloud Platform and custom apps for HCM and EH&S.
+
+Developed two Health and Safety products on SAP technology: one natively on HANA for the full stack, and another with ABAP/Gateway in the backend and Fiori/UI5 in the frontend.
+
+Also handled administrative and commercial tasks: technical and business proposals and meetings with key users, business analysts, customers and prospects.
+"""
+
+technologies = ["HANA", "Fiori", "SAPUI5", "SAP Gateway", "SAP Cloud Platform", "HCM", "EH&S", "Git"]
