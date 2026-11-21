@@ -37,10 +37,10 @@ export const collections = {
 		loader: glob({ base: './src/content/work', pattern: '**/*.md' }),
 		schema: z.object({
 			title: z.string(),
-			href: z.string(),
+			href: z.string().optional(),
 			sequence: z.number(),
 			description: z.string(),
-			//publishDate: z.coerce.date(),
+			publishDate: z.coerce.date().optional(),
 			tags: z.array(z.string()),
 			img: z.string(),
 			img_alt: z.string().optional(),

@@ -19,7 +19,7 @@ const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[]
 
 <div class="socials">
 	{iconLinks.map(({ href, icon, label }) => (
-		<a href={href} class="social">
+		<a href={href} class="social" target="_blank">
 			<span class="sr-only">{label}</span>
 			<Icon icon={icon} />
 		</a>

@@ -1,6 +1,6 @@
 ---
 title: e-books
-#href: /work/ebooks/
+href: /work/ebooks/
 sequence: 10
 img: /assets/ebooks.jpg
 img_alt: Ebooks
