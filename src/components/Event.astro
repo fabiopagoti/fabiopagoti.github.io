@@ -1,0 +1,382 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Tags from './Tags.astro';
+
+interface Props {
+	event: CollectionEntry<'events'>;
+}
+
+const { name, year, city, country, format, location, photos = [], presentations = [] } = Astro.props.event.data;
+
+const formatLabel = format === 'online' ? 'Online' : 'In person';
+
+const links = (p: (typeof presentations)[number]) =>
+	[
+		{ label: 'Video', href: p.video },
+		{ label: 'Slides', href: p.slides },
+		{ label: 'Photos', href: p.photos },
+	].filter((link): link is { label: string; href: string } => Boolean(link.href));
+
+// YouTube and Vimeo links become an embeddable player URL; other hosts stay plain links.
+const embedUrl = (href?: string) => {
+	if (!href) return undefined;
+	try {
+		const url = new URL(href);
+		const host = url.hostname.replace(/^www\./, '');
+		if (host === 'youtu.be') return `https://www.youtube-nocookie.com/embed/${url.pathname.slice(1)}`;
+		if (host === 'youtube.com' || host === 'm.youtube.com') {
+			const id = url.searchParams.get('v') ?? url.pathname.match(/^\/(?:embed|shorts)\/([^/]+)/)?.[1];
+			return id ? `https://www.youtube-nocookie.com/embed/${id}` : undefined;
+		}
+		if (host === 'vimeo.com') {
+			const id = url.pathname.match(/^\/(\d+)/)?.[1];
+			return id ? `https://player.vimeo.com/video/${id}` : undefined;
+		}
+	} catch {
+		// Not a valid URL; fall through to a plain link.
+	}
+	return undefined;
+};
+---
+
+<article class="event box">
+	<div class:list={['layout', photos.length > 0 && 'has-photos']}>
+		<div class="details stack gap-4">
+			<header class="stack gap-2">
+				<h3>{name} <span class="year">{year}</span></h3>
+				<Tags tags={[formatLabel]} />
+				<p class="meta">
+					{city}, {country}
+					{location && <> · {location}</>}
+				</p>
+			</header>
+
+			{
+				presentations.length > 0 && (
+					<ul class="presentations stack gap-4">
+						{presentations.map((presentation) => {
+							const embed = embedUrl(presentation.video);
+							return (
+								<li class="stack gap-2">
+									<span class="title">{presentation.title}</span>
+									{embed && (
+										<div class="player">
+											<iframe
+												src={embed}
+												title={`${presentation.title} (video)`}
+												loading="lazy"
+												allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+												referrerpolicy="strict-origin-when-cross-origin"
+												allowfullscreen
+											/>
+										</div>
+									)}
+									<span class="links">
+										{links(presentation)
+											.filter(({ label, href }) => !(label === 'Video' && embed))
+											.map(({ label, href }) => (
+												<a class="link" href={href} target="_blank" rel="noopener noreferrer">
+													{label}
+												</a>
+											))}
+									</span>
+								</li>
+							);
+						})}
+					</ul>
+				)
+			}
+		</div>
+
+		{
+			photos.length > 0 && (
+				<div class="carousel" role="group" aria-roledescription="carousel" aria-label={`${name} ${year} photos`}>
+					<ul class="track" tabindex="0">
+						{photos.map((photo, i) => (
+							<li class="slide" aria-label={`Photo ${i + 1} of ${photos.length}`}>
+								<button type="button" class="thumb" data-full={photo.href} data-alt={photo.alt}>
+									<img src={photo.href} alt={photo.alt} loading="lazy" decoding="async" />
+								</button>
+							</li>
+						))}
+					</ul>
+					{photos.length > 1 && (
+						<>
+							<button type="button" class="nav prev" aria-label="Previous photo">‹</button>
+							<button type="button" class="nav next" aria-label="Next photo">›</button>
+							<span class="counter" aria-hidden="true">
+								<span class="current">1</span> / {photos.length}
+							</span>
+						</>
+					)}
+				</div>
+			)
+		}
+	</div>
+
+	<dialog class="lightbox" aria-label="Photo viewer">
+		<form method="dialog">
+			<button class="close" aria-label="Close photo viewer">×</button>
+		</form>
+		<img alt="" />
+	</dialog>
+</article>
+
+<style>
+	.box {
+		border: 1px solid var(--gray-800);
+		border-radius: 0.75rem;
+		padding: 1.5rem;
+		background: var(--gradient-subtle);
+		box-shadow: var(--shadow-sm);
+		transition:
+			border-color 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.box:hover {
+		border-color: var(--accent-light);
+	}
+
+	.layout {
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	h3 {
+		font-size: var(--text-xl);
+	}
+
+	.year {
+		color: var(--gray-400);
+		font-weight: 400;
+	}
+
+	p,
+	.presentations {
+		color: var(--gray-400);
+	}
+
+	.meta {
+		font-size: var(--text-sm);
+	}
+
+	.presentations {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.title {
+		color: var(--gray-0);
+		font-weight: 600;
+	}
+
+	.player {
+		aspect-ratio: 16 / 9;
+		border-radius: 0.5rem;
+		overflow: hidden;
+		background: var(--gray-999);
+	}
+
+	.player iframe {
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 1rem;
+	}
+
+	.link {
+		color: var(--accent-regular);
+		font-weight: 600;
+	}
+
+	/* Carousel: native scroll-snap, enhanced with prev/next buttons by the script below. */
+	.carousel {
+		position: relative;
+		align-self: start;
+		border-radius: 0.75rem;
+		overflow: hidden;
+		background: var(--gray-800);
+	}
+
+	.track {
+		display: flex;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+	}
+
+	.track::-webkit-scrollbar {
+		display: none;
+	}
+
+	.track:focus-visible {
+		outline: 2px solid var(--accent-light);
+		outline-offset: -2px;
+	}
+
+	.slide {
+		flex: 0 0 100%;
+		scroll-snap-align: center;
+	}
+
+	.thumb {
+		display: block;
+		width: 100%;
+		padding: 0;
+		border: 0;
+		background: none;
+		cursor: zoom-in;
+	}
+
+	.thumb img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+	}
+
+	.nav {
+		position: absolute;
+		top: 50%;
+		translate: 0 -50%;
+		width: 2.25rem;
+		height: 2.25rem;
+		border: 0;
+		border-radius: 50%;
+		background: var(--gray-999_40);
+		color: var(--gray-0);
+		font-size: 1.5rem;
+		line-height: 1;
+		cursor: pointer;
+		backdrop-filter: blur(4px);
+	}
+
+	.nav:hover,
+	.nav:focus-visible {
+		background: var(--accent-regular);
+		color: var(--accent-text-over);
+	}
+
+	.prev {
+		left: 0.5rem;
+	}
+
+	.next {
+		right: 0.5rem;
+	}
+
+	.counter {
+		position: absolute;
+		right: 0.5rem;
+		bottom: 0.5rem;
+		padding: 0.1rem 0.6rem;
+		border-radius: 999rem;
+		background: var(--gray-999_40);
+		color: var(--gray-0);
+		font-size: var(--text-sm);
+		backdrop-filter: blur(4px);
+	}
+
+	.lightbox {
+		max-width: min(95vw, 70rem);
+		max-height: 95vh;
+		padding: 0;
+		border: 0;
+		border-radius: 0.75rem;
+		background: transparent;
+		overflow: visible;
+	}
+
+	.lightbox::backdrop {
+		background: rgba(0, 0, 0, 0.85);
+	}
+
+	.lightbox img {
+		display: block;
+		max-width: 100%;
+		max-height: 90vh;
+		margin: 0 auto;
+		border-radius: 0.75rem;
+	}
+
+	.close {
+		position: absolute;
+		top: -2.5rem;
+		right: 0;
+		width: 2.25rem;
+		height: 2.25rem;
+		border: 0;
+		border-radius: 50%;
+		background: var(--gray-999);
+		color: var(--gray-0);
+		font-size: 1.5rem;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	@media (min-width: 50em) {
+		.box {
+			border-radius: 1.5rem;
+			padding: 2.5rem;
+		}
+
+		.layout {
+			gap: 2.5rem;
+		}
+
+		/* Details on the left, carousel on the right. */
+		.layout.has-photos {
+			grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		}
+	}
+</style>
+
+<script>
+	document.querySelectorAll<HTMLElement>('.event').forEach((card) => {
+		const track = card.querySelector<HTMLElement>('.track');
+		const dialog = card.querySelector<HTMLDialogElement>('.lightbox');
+		if (!track || !dialog) return;
+
+		// Prev/next buttons and the "n / total" counter.
+		const slides = track.children.length;
+		const current = card.querySelector<HTMLElement>('.current');
+		const go = (dir: number) => track.scrollBy({ left: dir * track.clientWidth, behavior: 'smooth' });
+		card.querySelector('.prev')?.addEventListener('click', () => go(-1));
+		card.querySelector('.next')?.addEventListener('click', () => go(1));
+		track.addEventListener(
+			'scroll',
+			() => {
+				const index = Math.round(track.scrollLeft / track.clientWidth);
+				if (current) current.textContent = String(Math.min(index, slides - 1) + 1);
+			},
+			{ passive: true },
+		);
+		track.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowLeft') go(-1);
+			if (e.key === 'ArrowRight') go(1);
+		});
+
+		// Lightbox: open the clicked photo full-size; close on backdrop click.
+		const img = dialog.querySelector('img')!;
+		card.querySelectorAll<HTMLButtonElement>('.thumb').forEach((thumb) => {
+			thumb.addEventListener('click', () => {
+				img.src = thumb.dataset.full ?? '';
+				img.alt = thumb.dataset.alt ?? '';
+				dialog.showModal();
+			});
+		});
+		dialog.addEventListener('click', (e) => {
+			if (e.target === dialog) dialog.close();
+		});
+	});
+</script>

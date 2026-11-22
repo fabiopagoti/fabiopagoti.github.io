@@ -17,10 +17,10 @@ Describe the projects you worked on.
 
 technologies = ["ABAP", "SAPUI5", "Fiori", "HANA"]
 
-[[images]]
+[[photos]]
 src = "./example-company/photo-1.svg"
 alt = "Describe the image"
 
-[[images]]
+[[photos]]
 src = "./example-company/photo-2.svg"
 alt = "Describe the image"

@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import ContactCTA from '../../components/ContactCTA.astro';
+import Event from '../../components/Event.astro';
+import Hero from '../../components/Hero.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const events = (await getCollection('events')).sort(
+	(a, b) => b.data.year - a.data.year || a.data.name.localeCompare(b.data.name),
+);
+---
+
+<BaseLayout title="Events | Fábio Pagoti" description="Events where Fábio Pagoti has taken part">
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-8">
+			<Hero title="Events" tagline="Conferences and community events I have taken part in." align="start" />
+			<p><a href="/work/">← Back to My Work</a></p>
+			<ul class="stack gap-8 events">
+				{
+					events.map((event) => <li><Event event={event} /></li>)
+				}
+			</ul>
+		</main>
+		<ContactCTA />
+	</div>
+</BaseLayout>
+
+<style>
+	.events {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+</style>

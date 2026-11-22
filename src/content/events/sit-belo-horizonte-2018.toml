@@ -1,0 +1,10 @@
+# Venue and presentations still to be added.
+name = "SAP Inside Track Belo Horizonte"
+year = 2018
+city = "Belo Horizonte"
+country = "Brazil"
+format = "in-person"
+
+[[photos]]
+href = "/events/sit-belo-horizonte-2018/sit-belo-horizonte-2018-1.jpg"
+alt = "SAP Inside Track Belo Horizonte 2018, photo 1"

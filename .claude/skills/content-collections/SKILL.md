@@ -1,6 +1,6 @@
 ---
 name: content-collections
-description: Add or update entries in the companies, books, or work content collections and their frontmatter/TOML fields. Use for content or schema changes.
+description: Add or update collections and their entries (companies, books, work, etc) as well as  their frontmatter/TOML fields. Use for content or schema changes.
 ---
 
 1. Read `src/content.config.ts` for the collection's required fields and defaults.

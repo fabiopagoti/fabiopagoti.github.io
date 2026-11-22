@@ -1,0 +1,34 @@
+# Venue, photos and presentations still to be added.
+name = "SAP Inside Track Porto"
+year = 2025
+city = "Porto"
+country = "Portugal"
+format = "in-person"
+
+[[photos]]
+href = "/events/sit-porto-2025/sit-porto-2025-1.jpeg"
+alt = "SAP Inside Track Porto 2025, photo 1"
+
+[[photos]]
+href = "/events/sit-porto-2025/sit-porto-2025-2.jpeg"
+alt = "SAP Inside Track Porto 2025, photo 2"
+
+[[photos]]
+href = "/events/sit-porto-2025/sit-porto-2025-3.jpeg"
+alt = "SAP Inside Track Porto 2025, photo 3"
+
+[[photos]]
+href = "/events/sit-porto-2025/sit-porto-2025-4.jpeg"
+alt = "SAP Inside Track Porto 2025, photo 4"
+
+[[photos]]
+href = "/events/sit-porto-2025/sit-porto-2025-5.jpeg"
+alt = "SAP Inside Track Porto 2025, photo 5"
+
+[[photos]]
+href = "/events/sit-porto-2025/sit-porto-2025-6.jpeg"
+alt = "SAP Inside Track Porto 2025, photo 6"
+
+[[photos]]
+href = "/events/sit-porto-2025/sit-porto-2025-7.jpeg"
+alt = "SAP Inside Track Porto 2025, photo 7"

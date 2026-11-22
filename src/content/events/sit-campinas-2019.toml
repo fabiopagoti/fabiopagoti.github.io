@@ -1,0 +1,26 @@
+# Venue, photos and presentations still to be added.
+name = "SAP Inside Track Campinas"
+year = 2019
+city = "Campinas"
+country = "Brazil"
+format = "in-person"
+
+[[photos]]
+href = "/events/sit-campinas-2019/sit-campinas-2019-1.jpg"
+alt = "SAP Inside Track Campinas 2019, photo 1"
+
+[[photos]]
+href = "/events/sit-campinas-2019/sit-campinas-2019-2.jpg"
+alt = "SAP Inside Track Campinas 2019, photo 2"
+
+[[photos]]
+href = "/events/sit-campinas-2019/sit-campinas-2019-3.jpg"
+alt = "SAP Inside Track Campinas 2019, photo 3"
+
+[[photos]]
+href = "/events/sit-campinas-2019/sit-campinas-2019-4.jpg"
+alt = "SAP Inside Track Campinas 2019, photo 4"
+
+[[photos]]
+href = "/events/sit-campinas-2019/sit-campinas-2019-5.jpeg"
+alt = "SAP Inside Track Campinas 2019, photo 5"

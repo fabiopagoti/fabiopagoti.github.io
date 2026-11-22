@@ -1,0 +1,26 @@
+# Venue, photos and presentations still to be added.
+name = "SAP Inside Track São Paulo"
+year = 2013
+city = "São Paulo"
+country = "Brazil"
+format = "in-person"
+
+[[photos]]
+href = "/events/sit-sao-paulo-2013/sit-sao-paulo-2013-1.jpg"
+alt = "SAP Inside Track São Paulo 2013, photo 1"
+
+[[photos]]
+href = "/events/sit-sao-paulo-2013/sit-sao-paulo-2013-2.jpg"
+alt = "SAP Inside Track São Paulo 2013, photo 2"
+
+[[photos]]
+href = "/events/sit-sao-paulo-2013/sit-sao-paulo-2013-3.jpg"
+alt = "SAP Inside Track São Paulo 2013, photo 3"
+
+[[photos]]
+href = "/events/sit-sao-paulo-2013/sit-sao-paulo-2013-4.jpg"
+alt = "SAP Inside Track São Paulo 2013, photo 4"
+
+[[photos]]
+href = "/events/sit-sao-paulo-2013/sit-sao-paulo-2013-5.jpg"
+alt = "SAP Inside Track São Paulo 2013, photo 5"

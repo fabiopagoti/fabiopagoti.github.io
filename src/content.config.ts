@@ -32,6 +32,34 @@ export const collections = {
 				description: z.string(),
 			}),
 	}),
+	events: defineCollection({
+		// One TOML file per event in src/content/events.
+		loader: glob({ base: './src/content/events', pattern: '*.toml' }),
+		schema: z.object({
+			name: z.string(),
+			year: z.number().int(),
+			city: z.string(),
+			country: z.string(),
+			format: z.enum(['in-person', 'online']),
+			location: z.string().optional(),
+			photos: z.array(
+				z.object({ 
+					href: z.union([z.url(), z.string().startsWith('/')]),
+					alt: z.string()
+				})
+			).default([]).optional(),
+			presentations: z
+				.array(
+					z.object({
+						title: z.string(),
+						video: z.url().optional(),
+						slides: z.url().optional(),
+						photos: z.url().optional(),
+					}),
+				)
+				.default([]),
+		}),
+	}),
 	work: defineCollection({
 		// Load Markdown files in the src/content/work directory.
 		loader: glob({ base: './src/content/work', pattern: '**/*.md' }),

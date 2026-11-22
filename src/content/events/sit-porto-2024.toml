@@ -1,0 +1,30 @@
+# Venue, photos and presentations still to be added.
+name = "SAP Inside Track Porto"
+year = 2024
+city = "Porto"
+country = "Portugal"
+format = "in-person"
+
+[[photos]]
+href = "/events/sit-porto-2024/sit-porto-2024-1.jpeg"
+alt = "SAP Inside Track Porto 2024, photo 1"
+
+[[photos]]
+href = "/events/sit-porto-2024/sit-porto-2024-2.jpeg"
+alt = "SAP Inside Track Porto 2024, photo 2"
+
+[[photos]]
+href = "/events/sit-porto-2024/sit-porto-2024-3.jpeg"
+alt = "SAP Inside Track Porto 2024, photo 3"
+
+[[photos]]
+href = "/events/sit-porto-2024/sit-porto-2024-4.jpeg"
+alt = "SAP Inside Track Porto 2024, photo 4"
+
+[[photos]]
+href = "/events/sit-porto-2024/sit-porto-2024-5.jpeg"
+alt = "SAP Inside Track Porto 2024, photo 5"
+
+[[photos]]
+href = "/events/sit-porto-2024/sit-porto-2024-6.jpeg"
+alt = "SAP Inside Track Porto 2024, photo 6"

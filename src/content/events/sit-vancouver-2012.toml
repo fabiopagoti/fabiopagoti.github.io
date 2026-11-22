@@ -1,0 +1,10 @@
+# Venue, photos and presentations still to be added.
+name = "SAP Inside Track Vancouver"
+year = 2012
+city = "Vancouver"
+country = "Canada"
+format = "in-person"
+
+[[photos]]
+href = "/events/sit-vancouver-2012/sit-vancouver-2012-1.jpg"
+alt = "SAP Inside Track Vancouver 2012, photo 1"
