@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
 import Tags from './Tags.astro';
 
 interface Props {
@@ -10,23 +11,30 @@ const { name, year, city, country, format, location, photos = [], presentations 
 
 const formatLabel = format === 'online' ? 'Online' : 'In person';
 
-const links = (p: (typeof presentations)[number]) =>
-	[
-		{ label: 'Video', href: p.video },
-		{ label: 'Slides', href: p.slides },
-		{ label: 'Photos', href: p.photos },
-	].filter((link): link is { label: string; href: string } => Boolean(link.href));
-
 // YouTube and Vimeo links become an embeddable player URL; other hosts stay plain links.
+// Seconds from `t=26216` or `t=1h2m3s` become the player's start offset.
+const startSeconds = (t: string | null) => {
+	if (!t) return 0;
+	if (/^\d+$/.test(t)) return Number(t);
+	const [, h = 0, m = 0, sec = 0] = t.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/) ?? [];
+	return Number(h) * 3600 + Number(m) * 60 + Number(sec);
+};
+
 const embedUrl = (href?: string) => {
 	if (!href) return undefined;
 	try {
 		const url = new URL(href);
 		const host = url.hostname.replace(/^www\./, '');
-		if (host === 'youtu.be') return `https://www.youtube-nocookie.com/embed/${url.pathname.slice(1)}`;
+		const youtube = (id?: string) => {
+			if (!id) return undefined;
+			const start = startSeconds(url.searchParams.get('t') ?? url.searchParams.get('start'));
+			return `https://www.youtube-nocookie.com/embed/${id}${start ? `?start=${start}` : ''}`;
+		};
+		if (host === 'youtu.be') return youtube(url.pathname.slice(1));
 		if (host === 'youtube.com' || host === 'm.youtube.com') {
-			const id = url.searchParams.get('v') ?? url.pathname.match(/^\/(?:embed|shorts)\/([^/]+)/)?.[1];
-			return id ? `https://www.youtube-nocookie.com/embed/${id}` : undefined;
+			return youtube(
+				url.searchParams.get('v') ?? url.pathname.match(/^\/(?:embed|shorts|live)\/([^/]+)/)?.[1],
+			);
 		}
 		if (host === 'vimeo.com') {
 			const id = url.pathname.match(/^\/(\d+)/)?.[1];
@@ -57,8 +65,34 @@ const embedUrl = (href?: string) => {
 						{presentations.map((presentation) => {
 							const embed = embedUrl(presentation.video);
 							return (
-								<li class="stack gap-2">
-									<span class="title">{presentation.title}</span>
+								<li class="presentation stack gap-2">
+									<div class="row">
+										<span class="title">{presentation.title}</span>
+										<span class="media">
+											{[
+												{ icon: 'video', label: 'Video', href: presentation.video },
+												{ icon: 'presentation', label: 'Slides', href: presentation.slides },
+											].map(({ icon, label, href }) =>
+												href ? (
+													<a
+														class="media-link"
+														href={href}
+														target="_blank"
+														rel="noopener noreferrer"
+														aria-label={`${label}: ${presentation.title}`}
+														title={label}
+													>
+														<Icon icon={icon as 'video' | 'presentation'} size="1.25rem" />
+													</a>
+												) : (
+													<span class="media-link off" title={`No ${label.toLowerCase()} available`}>
+														<Icon icon={icon as 'video' | 'presentation'} size="1.25rem" />
+														<span class="sr-only">No {label.toLowerCase()} available</span>
+													</span>
+												),
+											)}
+										</span>
+									</div>
 									{embed && (
 										<div class="player">
 											<iframe
@@ -71,15 +105,11 @@ const embedUrl = (href?: string) => {
 											/>
 										</div>
 									)}
-									<span class="links">
-										{links(presentation)
-											.filter(({ label, href }) => !(label === 'Video' && embed))
-											.map(({ label, href }) => (
-												<a class="link" href={href} target="_blank" rel="noopener noreferrer">
-													{label}
-												</a>
-											))}
-									</span>
+									{presentation.photos && (
+										<a class="link" href={presentation.photos} target="_blank" rel="noopener noreferrer">
+											Photos
+										</a>
+									)}
 								</li>
 							);
 						})}
@@ -119,6 +149,9 @@ const embedUrl = (href?: string) => {
 			<button class="close" aria-label="Close photo viewer">×</button>
 		</form>
 		<img alt="" />
+		<button type="button" class="lb-nav lb-prev" aria-label="Previous photo">‹</button>
+		<button type="button" class="lb-nav lb-next" aria-label="Next photo">›</button>
+		<p class="lb-caption" aria-live="polite"></p>
 	</dialog>
 </article>
 
@@ -179,16 +212,65 @@ const embedUrl = (href?: string) => {
 		background: var(--gray-999);
 	}
 
+	/* Centered at 85% of the presentation width on wide screens; full width when stacked. */
+	@media (min-width: 50em) {
+		.player {
+			width: 85%;
+			margin-inline: auto;
+		}
+	}
+
 	.player iframe {
 		width: 100%;
 		height: 100%;
 		border: 0;
 	}
 
-	.links {
+	.presentation {
+		padding-top: 0.75rem;
+		border-top: 1px solid var(--gray-800);
+	}
+
+	.row {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 0.25rem 1rem;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.media {
+		display: flex;
+		flex: none;
+		gap: 0.5rem;
+	}
+
+	.media-link {
+		display: inline-flex;
+		padding: 0.35rem;
+		border-radius: 0.5rem;
+		color: var(--accent-regular);
+		background: var(--gray-999_40);
+		border: 1px solid var(--gray-800);
+	}
+
+	a.media-link:hover,
+	a.media-link:focus-visible {
+		color: var(--accent-text-over);
+		background: var(--accent-regular);
+	}
+
+	.media-link.off {
+		color: var(--gray-400);
+		opacity: 0.35;
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
 	}
 
 	.link {
@@ -287,7 +369,13 @@ const embedUrl = (href?: string) => {
 		backdrop-filter: blur(4px);
 	}
 
+	/* The global `* { margin: 0 }` reset removes the dialog's auto margin, so center it explicitly. */
 	.lightbox {
+		position: fixed;
+		inset: 0;
+		margin: auto;
+		width: fit-content;
+		height: fit-content;
 		max-width: min(95vw, 70rem);
 		max-height: 95vh;
 		padding: 0;
@@ -307,6 +395,43 @@ const embedUrl = (href?: string) => {
 		max-height: 90vh;
 		margin: 0 auto;
 		border-radius: 0.75rem;
+	}
+
+	.lb-nav {
+		position: absolute;
+		top: 50%;
+		translate: 0 -50%;
+		width: 3rem;
+		height: 3rem;
+		border: 0;
+		border-radius: 50%;
+		background: var(--gray-999_40);
+		color: var(--gray-0);
+		font-size: 2rem;
+		line-height: 1;
+		cursor: pointer;
+		backdrop-filter: blur(4px);
+	}
+
+	.lb-nav:hover,
+	.lb-nav:focus-visible {
+		background: var(--accent-regular);
+		color: var(--accent-text-over);
+	}
+
+	.lb-prev {
+		left: 0.5rem;
+	}
+
+	.lb-next {
+		right: 0.5rem;
+	}
+
+	.lb-caption {
+		margin: 0.75rem 0 0;
+		text-align: center;
+		color: #fff;
+		font-size: var(--text-sm);
 	}
 
 	.close {
@@ -366,14 +491,32 @@ const embedUrl = (href?: string) => {
 			if (e.key === 'ArrowRight') go(1);
 		});
 
-		// Lightbox: open the clicked photo full-size; close on backdrop click.
+		// Lightbox: a centered viewer with previous/next (wrapping), arrow keys and a caption.
 		const img = dialog.querySelector('img')!;
-		card.querySelectorAll<HTMLButtonElement>('.thumb').forEach((thumb) => {
+		const caption = dialog.querySelector<HTMLElement>('.lb-caption')!;
+		const thumbs = [...card.querySelectorAll<HTMLButtonElement>('.thumb')];
+		let index = 0;
+		const show = (i: number) => {
+			index = (i + thumbs.length) % thumbs.length;
+			const thumb = thumbs[index];
+			img.src = thumb.dataset.full ?? '';
+			img.alt = thumb.dataset.alt ?? '';
+			caption.textContent = `${index + 1} / ${thumbs.length}`;
+		};
+		thumbs.forEach((thumb, i) => {
 			thumb.addEventListener('click', () => {
-				img.src = thumb.dataset.full ?? '';
-				img.alt = thumb.dataset.alt ?? '';
+				show(i);
 				dialog.showModal();
 			});
+		});
+		const multiple = thumbs.length > 1;
+		dialog.querySelectorAll<HTMLElement>('.lb-nav').forEach((btn) => (btn.hidden = !multiple));
+		dialog.querySelector('.lb-prev')?.addEventListener('click', () => show(index - 1));
+		dialog.querySelector('.lb-next')?.addEventListener('click', () => show(index + 1));
+		dialog.addEventListener('keydown', (e) => {
+			if (!multiple) return;
+			if (e.key === 'ArrowLeft') show(index - 1);
+			if (e.key === 'ArrowRight') show(index + 1);
 		});
 		dialog.addEventListener('click', (e) => {
 			if (e.target === dialog) dialog.close();

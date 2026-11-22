@@ -28,3 +28,8 @@ alt = "SAP Inside Track Porto 2024, photo 5"
 [[photos]]
 href = "/events/sit-porto-2024/sit-porto-2024-6.jpeg"
 alt = "SAP Inside Track Porto 2024, photo 6"
+
+[[presentations]]
+title = "SAP BUILD Work Zone Content Federation Deep Dive"
+video = "https://www.youtube.com/live/miFkEAnpLuk?si=vF_WfN9mf1_gbRc2&t=26216"
+#slides = "https://example.com/sit-porto-2024/slides"

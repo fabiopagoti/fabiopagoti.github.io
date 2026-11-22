@@ -1,0 +1,19 @@
+# Venue, photos and presentations still to be added.
+name = "SAP Inside Track Campinas"
+year = 2017
+city = "Campinas"
+country = "Brazil"
+format = "in-person"
+
+[[photos]]
+href = "/events/sit-campinas-2017/sit-campinas-2017-1.jpg"
+alt = "SAP Inside Track Campinas 2017, photo 1"
+
+[[photos]]
+href = "/events/sit-campinas-2017/sit-campinas-2017-2.jpg"
+alt = "SAP Inside Track Campinas 2017, photo 2"
+
+
+[[presentations]]
+title = "NEMO - MEAN Stack, mas com OpenUI5"
+slides = "https://slides.com/fabiopagoti/sitcam2017"

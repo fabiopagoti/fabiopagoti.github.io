@@ -24,3 +24,8 @@ alt = "SAP Inside Track São Paulo 2018, photo 4"
 [[photos]]
 href = "/events/sit-sao-paulo-2018/sit-sao-paulo-2018-5.jpg"
 alt = "SAP Inside Track São Paulo 2018, photo 5"
+
+# DUMMY presentation - replace with real data.
+[[presentations]]
+title = "Dummy talk: Building with ABAP and Fiori"
+slides = "https://example.com/sit-sao-paulo-2018/slides"

@@ -4,3 +4,47 @@ year = 2015
 city = "Joinville"
 country = "Brazil"
 format = "in-person"
+
+[[photos]]
+href = "/events/sit-joinville-2015/sit-joinville-2015-1.jpg"
+alt = "SAP Inside Track Joinville 2015, photo 1"
+
+[[photos]]
+href = "/events/sit-joinville-2015/sit-joinville-2015-2.jpg"
+alt = "SAP Inside Track Joinville 2015, photo 2"
+
+[[photos]]
+href = "/events/sit-joinville-2015/sit-joinville-2015-3.jpg"
+alt = "SAP Inside Track Joinville 2015, photo 3"
+
+[[photos]]
+href = "/events/sit-joinville-2015/sit-joinville-2015-4.jpg"
+alt = "SAP Inside Track Joinville 2015, photo 4"
+
+[[photos]]
+href = "/events/sit-joinville-2015/sit-joinville-2015-5.png"
+alt = "SAP Inside Track Joinville 2015, photo 5"
+
+[[photos]]
+href = "/events/sit-joinville-2015/sit-joinville-2015-6.jpg"
+alt = "SAP Inside Track Joinville 2015, photo 6"
+
+[[photos]]
+href = "/events/sit-joinville-2015/sit-joinville-2015-7.jpg"
+alt = "SAP Inside Track Joinville 2015, photo 7"
+
+[[photos]]
+href = "/events/sit-joinville-2015/sit-joinville-2015-8.jpg"
+alt = "SAP Inside Track Joinville 2015, photo 8"
+
+[[presentations]]
+title = "Componentes UI5"
+video = "https://www.youtube.com/watch?v=xiZzgrHwMf0"
+slides = "https://pt.slideshare.net/slideshow/componentes-ui5-sap-inside-track-joinville-2015-fbio-pagoti/51744288?from_search=0&_gl=1*a9iqiu*_up*MQ..*_ga*MjA0NjYwODkxNi4xNzk1MzExNjI4*_ga_JFMG63W8KJ*czE3OTUzMTE2MjckbzEkZzAkdDE3OTUzMTE2MjckajYwJGwwJGgw"
+
+[[presentations]]
+title = "HANA XS Data Services"
+video = "https://www.youtube.com/watch?v=psdVT-2RnhY"
+slides = "https://pt.slideshare.net/slideshow/hana-xs-data-services-sap-inside-track-joinville-2015-fbio-pagoti/51744282?from_search=1&_gl=1*a9iqiu*_up*MQ..*_ga*MjA0NjYwODkxNi4xNzk1MzExNjI4*_ga_JFMG63W8KJ*czE3OTUzMTE2MjckbzEkZzAkdDE3OTUzMTE2MjckajYwJGwwJGgw"
+
+

@@ -8,3 +8,9 @@ format = "in-person"
 [[photos]]
 href = "/events/sit-belo-horizonte-2018/sit-belo-horizonte-2018-1.jpg"
 alt = "SAP Inside Track Belo Horizonte 2018, photo 1"
+
+# DUMMY presentation - replace with real data.
+[[presentations]]
+title = "Dummy talk: Building with ABAP and Fiori"
+video = "https://example.com/sit-belo-horizonte-2018/video"
+slides = "https://example.com/sit-belo-horizonte-2018/slides"

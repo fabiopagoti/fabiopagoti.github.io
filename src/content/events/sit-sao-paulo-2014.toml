@@ -4,3 +4,15 @@ year = 2014
 city = "São Paulo"
 country = "Brazil"
 format = "in-person"
+
+[[presentations]]
+title = "Uso do GitHub para hospedar aplicações OpenUI5 Fabio Pagoti"
+video = "https://www.youtube.com/watch?v=z0diquLx8Q0"
+#slides = "https://example.com/sit-sao-paulo-2014/slides"
+
+[[presentations]]
+title = "Machine Learning on ABAP (feat Bruno Lucattelli)"
+video = "https://www.youtube.com/watch?v=st3x6bWZ7lI"
+#slides = "https://example.com/sit-sao-paulo-2014/slides"
+
+
