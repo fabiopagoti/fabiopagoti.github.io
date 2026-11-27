@@ -42,6 +42,7 @@ export const collections = {
 			country: z.string(),
 			format: z.enum(['in-person', 'online']),
 			location: z.string().optional(),
+			sites: z.array(z.object({ url: z.url(), name: z.string() })).default([]),
 			photos: z.array(
 				z.object({ 
 					href: z.union([z.url(), z.string().startsWith('/')]),

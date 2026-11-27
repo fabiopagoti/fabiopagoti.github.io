@@ -4,6 +4,15 @@ year = 2024
 city = "Porto"
 country = "Portugal"
 format = "in-person"
+location = "The Lodge Hotel" 
+
+[[sites]]
+url = "https://sitporto.com/sit2024/"
+name = "SIT Porto 2024"
+
+[[sites]]
+url = "https://community.sap.com/t5/porto-blog-posts/sap-inside-track-porto-2024/ba-p/13736300"
+name = "SIT Porto 2024 Agenda"
 
 [[photos]]
 href = "/events/sit-porto-2024/sit-porto-2024-1.jpeg"

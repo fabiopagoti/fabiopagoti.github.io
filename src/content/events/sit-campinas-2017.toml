@@ -4,6 +4,11 @@ year = 2017
 city = "Campinas"
 country = "Brazil"
 format = "in-person"
+location = "UNISAL"
+
+[[sites]]
+url = "https://community.sap.com/t5/s%C3%A3o-paulo-blog-posts/sap-inside-track-campinas-material-das-palestras/ba-p/13333371"
+name = "SAP Inside Track Campinas - Material das Palestras"
 
 [[photos]]
 href = "/events/sit-campinas-2017/sit-campinas-2017-1.jpg"

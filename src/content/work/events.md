@@ -1,5 +1,5 @@
 ---
-title: events
+title: Events
 href: /work/events/
 sequence: 20
 img: /assets/events.jpg

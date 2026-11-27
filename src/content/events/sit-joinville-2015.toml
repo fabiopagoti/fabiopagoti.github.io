@@ -4,6 +4,11 @@ year = 2015
 city = "Joinville"
 country = "Brazil"
 format = "in-person"
+location = "Católica de Santa Catarina"
+
+[[sites]]
+url = "https://community.sap.com/t5/joinville-blog-posts/sitjoi-2015-eu-fui-obrigado-joinville/ba-p/13138722"
+name = "#SITJOI 2015 Eu fui! Obrigado Joinville!!!"
 
 [[photos]]
 href = "/events/sit-joinville-2015/sit-joinville-2015-1.jpg"

@@ -7,7 +7,7 @@ interface Props {
 	event: CollectionEntry<'events'>;
 }
 
-const { name, year, city, country, format, location, photos = [], presentations = [] } = Astro.props.event.data;
+const { name, year, city, country, format, location, sites = [], photos = [], presentations = [] } = Astro.props.event.data;
 
 const formatLabel = format === 'online' ? 'Online' : 'In person';
 
@@ -58,6 +58,20 @@ const embedUrl = (href?: string) => {
 					{location && <> · {location}</>}
 				</p>
 			</header>
+
+			{
+				sites.length > 0 && (
+					<ul class="sites">
+						{sites.map((site) => (
+							<li>
+								<a class="link" href={site.url} target="_blank" rel="noopener noreferrer">
+									{site.name}
+								</a>
+							</li>
+						))}
+					</ul>
+				)
+			}
 
 			{
 				presentations.length > 0 && (
@@ -191,6 +205,13 @@ const embedUrl = (href?: string) => {
 	}
 
 	.meta {
+		font-size: var(--text-sm);
+	}
+
+	.sites {
+		margin: 0;
+		padding: 0;
+		list-style: none;
 		font-size: var(--text-sm);
 	}
 

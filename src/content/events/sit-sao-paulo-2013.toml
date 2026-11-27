@@ -4,6 +4,11 @@ year = 2013
 city = "São Paulo"
 country = "Brazil"
 format = "in-person"
+location = "SAP Office"
+
+[[sites]]
+url = "https://community.sap.com/t5/s%C3%A3o-paulo-blog-posts/sap-inside-track-sao-paulo-2013/ba-p/13271517"
+name = "SAP Inside Track Sao Paulo 2013"
 
 [[photos]]
 href = "/events/sit-sao-paulo-2013/sit-sao-paulo-2013-1.jpg"

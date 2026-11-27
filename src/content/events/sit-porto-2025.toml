@@ -4,6 +4,12 @@ year = 2025
 city = "Porto"
 country = "Portugal"
 format = "in-person"
+location = "The Lodge Hotel" 
+
+[[sites]]
+url = "https://sitporto.com/sit2024/"
+name = "SIT Porto 2024"
+
 
 [[photos]]
 href = "/events/sit-porto-2025/sit-porto-2025-1.jpeg"
@@ -20,15 +26,3 @@ alt = "SAP Inside Track Porto 2025, photo 3"
 [[photos]]
 href = "/events/sit-porto-2025/sit-porto-2025-4.jpeg"
 alt = "SAP Inside Track Porto 2025, photo 4"
-
-[[photos]]
-href = "/events/sit-porto-2025/sit-porto-2025-5.jpeg"
-alt = "SAP Inside Track Porto 2025, photo 5"
-
-[[photos]]
-href = "/events/sit-porto-2025/sit-porto-2025-6.jpeg"
-alt = "SAP Inside Track Porto 2025, photo 6"
-
-[[photos]]
-href = "/events/sit-porto-2025/sit-porto-2025-7.jpeg"
-alt = "SAP Inside Track Porto 2025, photo 7"

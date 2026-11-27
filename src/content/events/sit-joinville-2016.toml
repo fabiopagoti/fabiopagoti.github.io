@@ -1,0 +1,26 @@
+# Venue, photos and presentations still to be added.
+name = "SAP Inside Track Joinville"
+year = 2016
+city = "Joinville"
+country = "Brazil"
+format = "in-person"
+location = "Católica de Santa Catarina"
+
+
+[[sites]]
+url = "https://community.sap.com/t5/joinville-blog-posts/inscri%C3%A7%C3%B5es-abertas-sap-inside-track-joinville-2016/ba-p/13228266"
+name = "SAP Inside Track Joinville 2016"
+
+[[photos]]
+href = "/events/sit-joinville-2016/sit-joinville-2016-1.jpg"
+alt = "SAP Inside Track Joinville 2016, photo 1"
+
+[[photos]]
+href = "/events/sit-joinville-2016/sit-joinville-2016-2.jpg"
+alt = "SAP Inside Track Joinville 2016, photo 2"
+
+[[presentations]]
+title = "oData Vocabularies & SAPUI5 Smart Controls"
+#video = ""
+slides = "https://slides.com/fabiopagoti/sitjoi2016"
+
