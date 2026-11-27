@@ -1,0 +1,34 @@
+# Venue, photos and presentations still to be added.
+name = "SAP Inside Track São Paulo"
+year = 2013
+city = "São Paulo"
+country = "Brazil"
+format = "in-person"
+location = "SAP Office"
+
+[[sites]]
+url = "https://community.sap.com/t5/s%C3%A3o-paulo-blog-posts/sap-inside-track-sao-paulo-2013/ba-p/13271517"
+name = "SAP Inside Track Sao Paulo 2013"
+
+[[photos]]
+href = "/events/sit-sao-paulo-2013/sit-sao-paulo-2013-1.jpg"
+alt = "SAP Inside Track São Paulo 2013, photo 1"
+
+[[photos]]
+href = "/events/sit-sao-paulo-2013/sit-sao-paulo-2013-2.jpg"
+alt = "SAP Inside Track São Paulo 2013, photo 2"
+
+[[photos]]
+href = "/events/sit-sao-paulo-2013/sit-sao-paulo-2013-3.jpg"
+alt = "SAP Inside Track São Paulo 2013, photo 3"
+
+[[photos]]
+href = "/events/sit-sao-paulo-2013/sit-sao-paulo-2013-4.jpg"
+alt = "SAP Inside Track São Paulo 2013, photo 4"
+
+[[photos]]
+href = "/events/sit-sao-paulo-2013/sit-sao-paulo-2013-5.jpg"
+alt = "SAP Inside Track São Paulo 2013, photo 5"
+
+[[presentations]]
+title = "Projetos Open Source e pessoais como oportunidade de aprendizado"

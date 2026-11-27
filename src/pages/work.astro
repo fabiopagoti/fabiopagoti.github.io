@@ -8,8 +8,7 @@ import PortfolioPreview from '../components/PortfolioPreview.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const companies = (await getCollection('companies')).sort((a, b) => a.data.order - b.data.order);
-const [firstBook] = (await getCollection('books')).sort((a, b) => a.data.order - b.data.order);
-const projects = (await getCollection('work'))
+const projects = (await getCollection('work')).sort((a, b) => b.data.sequence - a.data.sequence);
 console.log(projects)
 ---
 

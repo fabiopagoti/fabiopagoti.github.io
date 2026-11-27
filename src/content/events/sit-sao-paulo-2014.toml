@@ -1,0 +1,24 @@
+# Venue, photos and presentations still to be added.
+name = "SAP Inside Track São Paulo"
+year = 2014
+city = "São Paulo"
+country = "Brazil"
+format = "in-person"
+location = "SAP Office"
+
+[[sites]]
+url = "https://community.sap.com/t5/s%C3%A3o-paulo-blog-posts/sitsp-2014-o-que-o-twitter-mostrou/ba-p/13110579"
+name = "#SITSP 2014 - O que o twitter mostrou"
+
+[[presentations]]
+title = "Uso do GitHub para hospedar aplicações OpenUI5 Fabio Pagoti"
+video = "https://www.youtube.com/watch?v=z0diquLx8Q0"
+#slides = "https://example.com/sit-sao-paulo-2014/slides"
+
+[[presentations]]
+title = "Machine Learning on ABAP (feat Bruno Lucattelli)"
+video = "https://www.youtube.com/watch?v=st3x6bWZ7lI"
+#slides = "https://example.com/sit-sao-paulo-2014/slides"
+
+
+

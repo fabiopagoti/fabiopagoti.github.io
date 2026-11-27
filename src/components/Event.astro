@@ -1,0 +1,546 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+import Tags from './Tags.astro';
+
+interface Props {
+	event: CollectionEntry<'events'>;
+}
+
+const { name, year, city, country, format, location, sites = [], photos = [], presentations = [] } = Astro.props.event.data;
+
+const formatLabel = format === 'online' ? 'Online' : 'In person';
+
+// YouTube and Vimeo links become an embeddable player URL; other hosts stay plain links.
+// Seconds from `t=26216` or `t=1h2m3s` become the player's start offset.
+const startSeconds = (t: string | null) => {
+	if (!t) return 0;
+	if (/^\d+$/.test(t)) return Number(t);
+	const [, h = 0, m = 0, sec = 0] = t.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/) ?? [];
+	return Number(h) * 3600 + Number(m) * 60 + Number(sec);
+};
+
+const embedUrl = (href?: string) => {
+	if (!href) return undefined;
+	try {
+		const url = new URL(href);
+		const host = url.hostname.replace(/^www\./, '');
+		const youtube = (id?: string) => {
+			if (!id) return undefined;
+			const start = startSeconds(url.searchParams.get('t') ?? url.searchParams.get('start'));
+			return `https://www.youtube-nocookie.com/embed/${id}${start ? `?start=${start}` : ''}`;
+		};
+		if (host === 'youtu.be') return youtube(url.pathname.slice(1));
+		if (host === 'youtube.com' || host === 'm.youtube.com') {
+			return youtube(
+				url.searchParams.get('v') ?? url.pathname.match(/^\/(?:embed|shorts|live)\/([^/]+)/)?.[1],
+			);
+		}
+		if (host === 'vimeo.com') {
+			const id = url.pathname.match(/^\/(\d+)/)?.[1];
+			return id ? `https://player.vimeo.com/video/${id}` : undefined;
+		}
+	} catch {
+		// Not a valid URL; fall through to a plain link.
+	}
+	return undefined;
+};
+---
+
+<article class="event box">
+	<div class:list={['layout', photos.length > 0 && 'has-photos']}>
+		<div class="details stack gap-4">
+			<header class="stack gap-2">
+				<h3>{name} <span class="year">{year}</span></h3>
+				<Tags tags={[formatLabel]} />
+				<p class="meta">
+					{city}, {country}
+					{location && <> · {location}</>}
+				</p>
+			</header>
+
+			{
+				sites.length > 0 && (
+					<ul class="sites">
+						{sites.map((site) => (
+							<li>
+								<a class="link" href={site.url} target="_blank" rel="noopener noreferrer">
+									{site.name}
+								</a>
+							</li>
+						))}
+					</ul>
+				)
+			}
+
+			{
+				presentations.length > 0 && (
+					<ul class="presentations stack gap-4">
+						{presentations.map((presentation) => {
+							const embed = embedUrl(presentation.video);
+							return (
+								<li class="presentation stack gap-2">
+									<div class="row">
+										<span class="title">{presentation.title}</span>
+										<span class="media">
+											{[
+												{ icon: 'video', label: 'Video', href: presentation.video },
+												{ icon: 'presentation', label: 'Slides', href: presentation.slides },
+											].map(({ icon, label, href }) =>
+												href ? (
+													<a
+														class="media-link"
+														href={href}
+														target="_blank"
+														rel="noopener noreferrer"
+														aria-label={`${label}: ${presentation.title}`}
+														title={label}
+													>
+														<Icon icon={icon as 'video' | 'presentation'} size="1.25rem" />
+													</a>
+												) : (
+													<span class="media-link off" title={`No ${label.toLowerCase()} available`}>
+														<Icon icon={icon as 'video' | 'presentation'} size="1.25rem" />
+														<span class="sr-only">No {label.toLowerCase()} available</span>
+													</span>
+												),
+											)}
+										</span>
+									</div>
+									{embed && (
+										<div class="player">
+											<iframe
+												src={embed}
+												title={`${presentation.title} (video)`}
+												loading="lazy"
+												allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+												referrerpolicy="strict-origin-when-cross-origin"
+												allowfullscreen
+											/>
+										</div>
+									)}
+									{presentation.photos && (
+										<a class="link" href={presentation.photos} target="_blank" rel="noopener noreferrer">
+											Photos
+										</a>
+									)}
+								</li>
+							);
+						})}
+					</ul>
+				)
+			}
+		</div>
+
+		{
+			photos.length > 0 && (
+				<div class="carousel" role="group" aria-roledescription="carousel" aria-label={`${name} ${year} photos`}>
+					<ul class="track" tabindex="0">
+						{photos.map((photo, i) => (
+							<li class="slide" aria-label={`Photo ${i + 1} of ${photos.length}`}>
+								<button type="button" class="thumb" data-full={photo.href} data-alt={photo.alt}>
+									<img src={photo.href} alt={photo.alt} loading="lazy" decoding="async" />
+								</button>
+							</li>
+						))}
+					</ul>
+					{photos.length > 1 && (
+						<>
+							<button type="button" class="nav prev" aria-label="Previous photo">‹</button>
+							<button type="button" class="nav next" aria-label="Next photo">›</button>
+							<span class="counter" aria-hidden="true">
+								<span class="current">1</span> / {photos.length}
+							</span>
+						</>
+					)}
+				</div>
+			)
+		}
+	</div>
+
+	<dialog class="lightbox" aria-label="Photo viewer">
+		<form method="dialog">
+			<button class="close" aria-label="Close photo viewer">×</button>
+		</form>
+		<img alt="" />
+		<button type="button" class="lb-nav lb-prev" aria-label="Previous photo">‹</button>
+		<button type="button" class="lb-nav lb-next" aria-label="Next photo">›</button>
+		<p class="lb-caption" aria-live="polite"></p>
+	</dialog>
+</article>
+
+<style>
+	.box {
+		border: 1px solid var(--gray-800);
+		border-radius: 0.75rem;
+		padding: 1.5rem;
+		background: var(--gradient-subtle);
+		box-shadow: var(--shadow-sm);
+		transition:
+			border-color 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.box:hover {
+		border-color: var(--accent-light);
+	}
+
+	.layout {
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	h3 {
+		font-size: var(--text-xl);
+	}
+
+	.year {
+		color: var(--gray-400);
+		font-weight: 400;
+	}
+
+	p,
+	.presentations {
+		color: var(--gray-400);
+	}
+
+	.meta {
+		font-size: var(--text-sm);
+	}
+
+	.sites {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: var(--text-sm);
+	}
+
+	.presentations {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.title {
+		color: var(--gray-0);
+		font-weight: 600;
+	}
+
+	.player {
+		aspect-ratio: 16 / 9;
+		border-radius: 0.5rem;
+		overflow: hidden;
+		background: var(--gray-999);
+	}
+
+	/* Centered at 85% of the presentation width on wide screens; full width when stacked. */
+	@media (min-width: 50em) {
+		.player {
+			width: 85%;
+			margin-inline: auto;
+		}
+	}
+
+	.player iframe {
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+
+	.presentation {
+		padding-top: 0.75rem;
+		border-top: 1px solid var(--gray-800);
+	}
+
+	.row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.media {
+		display: flex;
+		flex: none;
+		gap: 0.5rem;
+	}
+
+	.media-link {
+		display: inline-flex;
+		padding: 0.35rem;
+		border-radius: 0.5rem;
+		color: var(--accent-regular);
+		background: var(--gray-999_40);
+		border: 1px solid var(--gray-800);
+	}
+
+	a.media-link:hover,
+	a.media-link:focus-visible {
+		color: var(--accent-text-over);
+		background: var(--accent-regular);
+	}
+
+	.media-link.off {
+		color: var(--gray-400);
+		opacity: 0.35;
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+	}
+
+	.link {
+		color: var(--accent-regular);
+		font-weight: 600;
+	}
+
+	/* Carousel: native scroll-snap, enhanced with prev/next buttons by the script below. */
+	.carousel {
+		position: relative;
+		align-self: start;
+		border-radius: 0.75rem;
+		overflow: hidden;
+		background: var(--gray-800);
+	}
+
+	.track {
+		display: flex;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+	}
+
+	.track::-webkit-scrollbar {
+		display: none;
+	}
+
+	.track:focus-visible {
+		outline: 2px solid var(--accent-light);
+		outline-offset: -2px;
+	}
+
+	.slide {
+		flex: 0 0 100%;
+		scroll-snap-align: center;
+	}
+
+	.thumb {
+		display: block;
+		width: 100%;
+		padding: 0;
+		border: 0;
+		background: none;
+		cursor: zoom-in;
+	}
+
+	.thumb img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+	}
+
+	.nav {
+		position: absolute;
+		top: 50%;
+		translate: 0 -50%;
+		width: 2.25rem;
+		height: 2.25rem;
+		border: 0;
+		border-radius: 50%;
+		background: var(--gray-999_40);
+		color: var(--gray-0);
+		font-size: 1.5rem;
+		line-height: 1;
+		cursor: pointer;
+		backdrop-filter: blur(4px);
+	}
+
+	.nav:hover,
+	.nav:focus-visible {
+		background: var(--accent-regular);
+		color: var(--accent-text-over);
+	}
+
+	.prev {
+		left: 0.5rem;
+	}
+
+	.next {
+		right: 0.5rem;
+	}
+
+	.counter {
+		position: absolute;
+		right: 0.5rem;
+		bottom: 0.5rem;
+		padding: 0.1rem 0.6rem;
+		border-radius: 999rem;
+		background: var(--gray-999_40);
+		color: var(--gray-0);
+		font-size: var(--text-sm);
+		backdrop-filter: blur(4px);
+	}
+
+	/* The global `* { margin: 0 }` reset removes the dialog's auto margin, so center it explicitly. */
+	.lightbox {
+		position: fixed;
+		inset: 0;
+		margin: auto;
+		width: fit-content;
+		height: fit-content;
+		max-width: min(95vw, 70rem);
+		max-height: 95vh;
+		padding: 0;
+		border: 0;
+		border-radius: 0.75rem;
+		background: transparent;
+		overflow: visible;
+	}
+
+	.lightbox::backdrop {
+		background: rgba(0, 0, 0, 0.85);
+	}
+
+	.lightbox img {
+		display: block;
+		max-width: 100%;
+		max-height: 90vh;
+		margin: 0 auto;
+		border-radius: 0.75rem;
+	}
+
+	.lb-nav {
+		position: absolute;
+		top: 50%;
+		translate: 0 -50%;
+		width: 3rem;
+		height: 3rem;
+		border: 0;
+		border-radius: 50%;
+		background: var(--gray-999_40);
+		color: var(--gray-0);
+		font-size: 2rem;
+		line-height: 1;
+		cursor: pointer;
+		backdrop-filter: blur(4px);
+	}
+
+	.lb-nav:hover,
+	.lb-nav:focus-visible {
+		background: var(--accent-regular);
+		color: var(--accent-text-over);
+	}
+
+	.lb-prev {
+		left: 0.5rem;
+	}
+
+	.lb-next {
+		right: 0.5rem;
+	}
+
+	.lb-caption {
+		margin: 0.75rem 0 0;
+		text-align: center;
+		color: #fff;
+		font-size: var(--text-sm);
+	}
+
+	.close {
+		position: absolute;
+		top: -2.5rem;
+		right: 0;
+		width: 2.25rem;
+		height: 2.25rem;
+		border: 0;
+		border-radius: 50%;
+		background: var(--gray-999);
+		color: var(--gray-0);
+		font-size: 1.5rem;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	@media (min-width: 50em) {
+		.box {
+			border-radius: 1.5rem;
+			padding: 2.5rem;
+		}
+
+		.layout {
+			gap: 2.5rem;
+		}
+
+		/* Details on the left, carousel on the right. */
+		.layout.has-photos {
+			grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		}
+	}
+</style>
+
+<script>
+	document.querySelectorAll<HTMLElement>('.event').forEach((card) => {
+		const track = card.querySelector<HTMLElement>('.track');
+		const dialog = card.querySelector<HTMLDialogElement>('.lightbox');
+		if (!track || !dialog) return;
+
+		// Prev/next buttons and the "n / total" counter.
+		const slides = track.children.length;
+		const current = card.querySelector<HTMLElement>('.current');
+		const go = (dir: number) => track.scrollBy({ left: dir * track.clientWidth, behavior: 'smooth' });
+		card.querySelector('.prev')?.addEventListener('click', () => go(-1));
+		card.querySelector('.next')?.addEventListener('click', () => go(1));
+		track.addEventListener(
+			'scroll',
+			() => {
+				const index = Math.round(track.scrollLeft / track.clientWidth);
+				if (current) current.textContent = String(Math.min(index, slides - 1) + 1);
+			},
+			{ passive: true },
+		);
+		track.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowLeft') go(-1);
+			if (e.key === 'ArrowRight') go(1);
+		});
+
+		// Lightbox: a centered viewer with previous/next (wrapping), arrow keys and a caption.
+		const img = dialog.querySelector('img')!;
+		const caption = dialog.querySelector<HTMLElement>('.lb-caption')!;
+		const thumbs = [...card.querySelectorAll<HTMLButtonElement>('.thumb')];
+		let index = 0;
+		const show = (i: number) => {
+			index = (i + thumbs.length) % thumbs.length;
+			const thumb = thumbs[index];
+			img.src = thumb.dataset.full ?? '';
+			img.alt = thumb.dataset.alt ?? '';
+			caption.textContent = `${index + 1} / ${thumbs.length}`;
+		};
+		thumbs.forEach((thumb, i) => {
+			thumb.addEventListener('click', () => {
+				show(i);
+				dialog.showModal();
+			});
+		});
+		const multiple = thumbs.length > 1;
+		dialog.querySelectorAll<HTMLElement>('.lb-nav').forEach((btn) => (btn.hidden = !multiple));
+		dialog.querySelector('.lb-prev')?.addEventListener('click', () => show(index - 1));
+		dialog.querySelector('.lb-next')?.addEventListener('click', () => show(index + 1));
+		dialog.addEventListener('keydown', (e) => {
+			if (!multiple) return;
+			if (e.key === 'ArrowLeft') show(index - 1);
+			if (e.key === 'ArrowRight') show(index + 1);
+		});
+		dialog.addEventListener('click', (e) => {
+			if (e.target === dialog) dialog.close();
+		});
+	});
+</script>

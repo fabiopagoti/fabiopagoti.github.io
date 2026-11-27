@@ -1,0 +1,17 @@
+
+name = "Meetup ABAP Rio de Janeiro"
+year = 2016
+city = "Rio de Janeiro"
+country = "Brazil"
+format = "in-person"
+location = "SENAC Botafogo"
+
+[[sites]]
+url = "hhttps://community.sap.com/t5/rio-de-janeiro-blog-posts/meetup-abap-rio-de-janeiro-2016-2/ba-p/13303837"
+name = "Meetup ABAP Rio de Janeiro 2016.2"
+
+
+[[presentations]]
+title = "ABAP e seu futuro"
+#video = "https://example.com/sit-belo-horizonte-2018/video"
+slides = "https://slides.com/fabiopagoti/scn-rj-2016"

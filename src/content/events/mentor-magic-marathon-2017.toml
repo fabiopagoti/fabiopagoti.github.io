@@ -1,0 +1,19 @@
+# Venue and presentations still to be added.
+name = "24-Hour Mentor Magic Marathon"
+year = 2017
+city = "Remote"
+country = "Worldwide"
+format = "online"
+
+[[sites]]
+url = "https://community.sap.com/t5/technology-blog-posts-by-sap/24-hour-mentor-magic-marathon/ba-p/13333058"
+name = "24-Hour Mentor Magic Marathon"
+
+[[sites]]
+url = "https://web.archive.org/web/20171119004908/http://abap101.com/2017/10/10/24-hour-mentor-magic-marathon/"
+name = "Maratona de Webinars – 24-Hour Mentor Magic Marathon"
+
+[[presentations]]
+title = "Managing Fiori Apps using Technical and Business Catalogs"
+#video = "https://example.com/sit-belo-horizonte-2018/video"
+slides = "https://slides.com/fabiopagoti/mentor-magic"

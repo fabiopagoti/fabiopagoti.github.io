@@ -1,0 +1,22 @@
+# Venue, photos and presentations still to be added.
+name = "SAP Inside Track São Paulo"
+year = 2011
+city = "São Paulo"
+country = "Brazil"
+format = "in-person"
+location = "SAP Office"
+
+[[sites]]
+url = "https://community.sap.com/t5/additional-blog-posts-by-members/sitsp-2011-sharing-learning-and-having-fun/ba-p/12920919"
+name = "SITSP 2011: Sharing, learning and having fun"
+
+[[photos]]
+href = "/events/sit-sao-paulo-2011/sit-sao-paulo-2011-1.jpg"
+alt = "SAP Inside Track São Paulo 2011, photo 1"
+
+[[photos]]
+href = "/events/sit-sao-paulo-2011/sit-sao-paulo-2011-2.jpg"
+alt = "SAP Inside Track São Paulo 2011, photo 2"
+
+[[presentations]]
+title = "ABAP101 World Championship"

@@ -1,0 +1,27 @@
+# Venue, photos and presentations still to be added.
+name = "SAP Inside Track Campinas"
+year = 2018
+city = "Campinas"
+country = "Brazil"
+format = "in-person"
+location = "UNISAL"
+
+[[sites]]
+url = "https://community.sap.com/t5/s%C3%A3o-paulo-blog-posts/sap-inside-track-campinas-2018/ba-p/13361583"
+name = "SAP Inside Track Campinas 2018"
+
+[[photos]]
+href = "/events/sit-campinas-2018/sit-campinas-2018-1.jpg"
+alt = "SAP Inside Track Campinas 2018, photo 1"
+
+[[photos]]
+href = "/events/sit-campinas-2018/sit-campinas-2018-2.jpg"
+alt = "SAP Inside Track Campinas 2018, photo 2"
+
+[[photos]]
+href = "/events/sit-campinas-2018/sit-campinas-2018-3.jpg"
+alt = "SAP Inside Track Campinas 2018, photo 3"
+
+[[presentations]]
+title = "Fiori OVP - Do protótipo a implementação"
+slides = "https://slides.com/fabiopagoti/sitcps2018-8"

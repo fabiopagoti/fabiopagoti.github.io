@@ -1,0 +1,32 @@
+# Venue and presentations still to be added.
+name = "SAP Inside Track Belo Horizonte"
+year = 2018
+city = "Belo Horizonte"
+country = "Brazil"
+format = "in-person"
+
+[[sites]]
+url = "https://community.sap.com/t5/belo-horizonte-blog-posts/sitbh-2018-diversidade-comunidade-e-um-novo-formato/ba-p/13373479"
+name = "#SITBH 2018 - Diversidade, Comunidade e um Novo Formato"
+
+[[photos]]
+href = "/events/sit-belo-horizonte-2018/sit-belo-horizonte-2018-1.jpg"
+alt = "SAP Inside Track Belo Horizonte 2018, photo 1"
+
+[[photos]]
+href = "/events/sit-belo-horizonte-2018/sit-belo-horizonte-2018-2.jpg"
+alt = "SAP Inside Track Belo Horizonte 2018, photo 2"
+
+[[photos]]
+href = "/events/sit-belo-horizonte-2018/sit-belo-horizonte-2018-3.jpg"
+alt = "SAP Inside Track Belo Horizonte 2018, photo 3"
+
+[[presentations]]
+title = "Hands-on: Construindo uma aplicação com SAP UI5"
+#video = "https://example.com/sit-belo-horizonte-2018/video"
+slides = "https://slides.com/fabiopagoti/sitbh2018"
+
+[[presentations]]
+title = "Fiori Overview Pages - Do protótipo a implementação"
+#video = "https://example.com/sit-belo-horizonte-2018/video"
+slides = "https://slides.com/fabiopagoti/sitcps2018-8"

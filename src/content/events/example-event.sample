@@ -1,0 +1,15 @@
+# One file per event.
+name = "SAP Inside Track Example"
+year = 2025
+city = "Example City"
+country = "Example Country"
+format = "in-person" # "in-person" or "online"
+location = "Venue name" # optional
+photos = "https://example.com/photos" # optional
+
+# Repeat the table for each presentation. video, slides and photos are optional.
+[[presentations]]
+title = "Presentation title"
+video = "https://example.com/video"
+slides = "https://example.com/slides"
+photos = "https://example.com/presentation-photos"
